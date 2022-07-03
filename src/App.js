@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import Costs from "./Components/Costs/Costs";
+import NewCost from "./Components/NewCost/NewCost";
+import React, { useState } from "react";
+
+const INITIAL_COSTS = [];
 
 function App() {
+  const [costs, setCosts] = useState(INITIAL_COSTS);
+  const addCostHandler = (cost) => {
+    setCosts((prevCosts) => {
+      return [cost, ...prevCosts];
+    });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NewCost onAddCost={addCostHandler} />
+      <Costs costs={costs} />
     </div>
   );
 }
